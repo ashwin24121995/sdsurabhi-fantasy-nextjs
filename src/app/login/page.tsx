@@ -42,83 +42,126 @@ export default function LoginPage() {
     }
   };
 
+  const inputStyle = {
+    width: '100%',
+    padding: '14px 16px',
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    fontSize: '15px',
+    backgroundColor: '#ffffff',
+    color: '#333333',
+    outline: 'none',
+    transition: 'border-color 0.3s'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    marginBottom: '8px',
+    fontWeight: 600,
+    color: '#1e3a5f',
+    fontSize: '14px'
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1e3a5f] to-[#0d1f33] flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-3 mb-6">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e3a5f 0%, #0d1f33 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 16px' }}>
+      <div style={{ maxWidth: '420px', width: '100%' }}>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
             <Image src="/logo.webp" alt="SDSURABHI" width={60} height={60} />
-            <span className="text-3xl font-bold text-white">
-              SDS<span className="text-[#ff6b35]">URABHI</span>
+            <span style={{ fontSize: '28px', fontWeight: 'bold', color: '#ffffff' }}>
+              SDS<span style={{ color: '#ff6b35' }}>URABHI</span>
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-white mb-2">Welcome Back!</h1>
-          <p className="text-gray-300">Login to continue playing free fantasy cricket</p>
+          <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#ffffff', marginBottom: '8px' }}>Welcome Back!</h1>
+          <p style={{ color: '#d1d5db' }}>Login to continue playing free fantasy cricket</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="bg-[#e8f4fc] rounded-lg p-4 mb-6 text-center">
-            <span className="text-[#1e3a5f] font-semibold">🎮 100% FREE | No Real Money</span>
+        {/* Form Card */}
+        <div style={{ backgroundColor: '#ffffff', borderRadius: '16px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', padding: '32px' }}>
+          {/* Badge */}
+          <div style={{ backgroundColor: '#e8f4fc', borderRadius: '8px', padding: '16px', marginBottom: '24px', textAlign: 'center' }}>
+            <span style={{ color: '#1e3a5f', fontWeight: 600 }}>🎮 100% FREE | No Real Money</span>
           </div>
 
+          {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg p-4 mb-6">
+            <div style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', borderRadius: '8px', padding: '16px', marginBottom: '24px' }}>
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Email Address</label>
+            {/* Email */}
+            <div style={{ marginBottom: '20px' }}>
+              <label style={labelStyle}>Email Address</label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Enter your email"
                 required
+                style={inputStyle}
               />
             </div>
 
-            <div className="form-group">
-              <label>Password</label>
+            {/* Password */}
+            <div style={{ marginBottom: '24px' }}>
+              <label style={labelStyle}>Password</label>
               <input
                 type="password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="Enter your password"
                 required
+                style={inputStyle}
               />
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="btn btn-primary w-full py-4 text-lg disabled:opacity-50"
+              style={{
+                width: '100%',
+                padding: '16px 24px',
+                backgroundColor: loading ? '#fdba74' : '#ff6b35',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 600,
+                cursor: loading ? 'not-allowed' : 'pointer',
+                transition: 'background-color 0.3s'
+              }}
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-gray-600">
+          {/* Sign Up Link */}
+          <div style={{ marginTop: '24px', textAlign: 'center' }}>
+            <p style={{ color: '#4b5563' }}>
               Don&apos;t have an account?{' '}
-              <Link href="/signup" className="text-[#ff6b35] font-semibold hover:underline">
+              <Link href="/signup" style={{ color: '#ff6b35', fontWeight: 600, textDecoration: 'underline' }}>
                 Sign Up Free
               </Link>
             </p>
           </div>
 
-          <div className="mt-6 pt-6 border-t text-center text-sm text-gray-500">
+          {/* Footer Links */}
+          <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid #e5e7eb', textAlign: 'center', fontSize: '14px', color: '#6b7280' }}>
             <p>By logging in, you agree to our</p>
             <p>
-              <Link href="/terms" className="text-[#1e3a5f] hover:underline">Terms & Conditions</Link>
+              <Link href="/terms" style={{ color: '#1e3a5f', textDecoration: 'underline' }}>Terms & Conditions</Link>
               {' '}&{' '}
-              <Link href="/privacy" className="text-[#1e3a5f] hover:underline">Privacy Policy</Link>
+              <Link href="/privacy" style={{ color: '#1e3a5f', textDecoration: 'underline' }}>Privacy Policy</Link>
             </p>
           </div>
         </div>
 
-        <p className="text-center text-gray-400 text-sm mt-6">
+        {/* Bottom Warning */}
+        <p style={{ textAlign: 'center', color: '#9ca3af', fontSize: '14px', marginTop: '24px' }}>
           ⚠️ 18+ Only | Services not available in: AP, Assam, Nagaland, Odisha, Sikkim, Telangana
         </p>
       </div>
