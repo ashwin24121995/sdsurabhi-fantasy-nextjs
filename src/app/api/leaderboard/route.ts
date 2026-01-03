@@ -1,6 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+interface LeaderboardEntry {
+  id: number;
+  userId: number;
+  username: string;
+  totalPoints: number;
+  weeklyPoints: number;
+  monthlyPoints: number;
+  contestsPlayed: number;
+  teamsCreated: number;
+  rank: number | null;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -37,7 +49,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Add rank numbers
-    const rankedLeaderboard = leaderboard.map((entry, index) => ({
+    const rankedLeaderboard = leaderboard.map((entry: LeaderboardEntry, index: number) => ({
       ...entry,
       rank: index + 1
     }));
